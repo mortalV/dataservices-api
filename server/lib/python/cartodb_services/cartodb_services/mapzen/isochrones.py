@@ -12,7 +12,7 @@ from cartodb_services.tools.qps import qps_retry
 class MapzenIsochrones:
     'A Mapzen Isochrones wrapper for python'
 
-    BASE_URL = 'https://matrix.mapzen.com/isochrone'
+    BASE_URL = 'http://dev.epsilonmetrics.ru:8002/isochrone'
     READ_TIMEOUT = 60
     CONNECT_TIMEOUT = 10
     MAX_RETRIES = 1
@@ -87,7 +87,7 @@ class MapzenIsochrones:
                                 'costing': mode_source,
                                 'contours': contours,
                                 'generalize': 50,
-                                'denoise': .3}),
+                                'denoise': .3}, ensure_ascii = False, separators=(',', ':')),
             'api_key': self._app_key
         }
 
@@ -101,7 +101,9 @@ class MapzenIsochrones:
                 # Coordinates could have more than one isochrone. For the
                 # moment we're getting the first polygon only
                 coordinates = feature['geometry']['coordinates']
-                duration = feature['properties']['contour']
+                #postgresql required int but valhalla return float
+                #also maybe need conversion from minutes to seconds because input value from editor was seconds
+                duration = int(round(feature['properties']['contour']))
                 mapzen_response = MapzenIsochronesResponse(coordinates,
                                                            duration)
                 isochrones.append(mapzen_response)
