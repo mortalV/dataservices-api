@@ -19,6 +19,7 @@ class MatrixClient(Traceable):
     print client.one_to_many(locations, costing)
     """
 
+    #valhalla equals https://valhalla.readthedocs.io/en/latest/api/matrix/api-reference/ sources_to_targets method
     ONE_TO_MANY_URL = 'https://matrix.mapzen.com/one_to_many'
     READ_TIMEOUT = 60
     CONNECT_TIMEOUT = 10
