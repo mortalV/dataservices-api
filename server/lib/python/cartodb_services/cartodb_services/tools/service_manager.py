@@ -32,20 +32,20 @@ class ServiceManagerBase:
     def assert_within_limits(self, quota=True, rate=True):
         if rate and not self.rate_limiter.check():
             raise RateLimitExceeded()
-        if quota and not self.quota_service.check_user_quota():
+        if quota and not self.quota_service2.check_user_quota():
             raise QuotaExceededException()
 
     @property
     def config(self):
-        return self.config
+        return self.config2
 
     @property
     def quota_service(self):
-        return self.quota_service
+        return self.quota_service2
 
     @property
     def logger(self):
-        return self.logger
+        return self.logger2
 
 
 class ServiceManager(ServiceManagerBase):
@@ -59,12 +59,13 @@ class ServiceManager(ServiceManagerBase):
         service_config = ServiceConfiguration(service, username, orgname)
 
         logger_config = LoggerConfigBuilder(service_config.environment, service_config.server).get()
-        self.logger = Logger(logger_config)
 
-        self.config = config_builder(service_config.server, service_config.user, service_config.org, username, orgname, GD).get()
+        self.logger2 = Logger(logger_config)
+
+        self.config2 = config_builder(service_config.server, service_config.user, service_config.org, username, orgname, GD).get()
         rate_limit_config = RateLimitsConfigBuilder(service_config.server, service_config.user, service_config.org, service=service, username=username, orgname=orgname).get()
 
         redis_metrics_connection = RedisMetricsConnectionFactory(service_config.environment, service_config.server).get()
 
         self.rate_limiter = RateLimiter(rate_limit_config, redis_metrics_connection)
-        self.quota_service = QuotaService(self.config, redis_metrics_connection)
+        self.quota_service2 = QuotaService(self.config, redis_metrics_connection)
