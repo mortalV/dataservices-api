@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-import requests, time, zipfile, io, csv, cStringIO
+import requests, time, zipfile, io, csv
 import xml.etree.ElementTree as ET
 from collections import namedtuple
 from requests.adapters import HTTPAdapter
@@ -76,7 +76,7 @@ class HereMapsBulkGeocoder(HereMapsGeocoder, StreetPointBulkGeocoder):
         return results
 
     def _searches_to_csv(self, searches):
-        queue = cStringIO.StringIO()
+        queue = io.StringIO()
         writer = csv.writer(queue, delimiter='|')
         writer.writerow(['recId', 'searchText', 'country'])
 
@@ -215,7 +215,7 @@ class HereMapsBulkGeocoderV7(HereMapsGeocoderV7, StreetPointBulkGeocoder):
         return results
 
     def _searches_to_csv(self, searches):
-        queue = cStringIO.StringIO()
+        queue = io.StringIO()
         writer = csv.writer(queue, delimiter='|')
         writer.writerow(['recId', 'searchText', 'country'])
 

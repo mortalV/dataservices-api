@@ -1,2 +1,3 @@
 from cartodb_services.google.geocoder import GoogleMapsGeocoder
 from cartodb_services.google.bulk_geocoder import GoogleMapsBulkGeocoder
+from cartodb_services.google.client_factory import *
