@@ -90,7 +90,7 @@ class MapzenRouting(Traceable):
         json_options.update({"directions_options": {'units': units,
                              'narrative': False}})
 
-        return json.dumps(json_options)
+        return json.dumps(json_options, ensure_ascii = False, separators=(',', ':'))
 
     def __parse_directions(self, waypoints):
         path = []
