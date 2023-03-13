@@ -15,7 +15,7 @@ class PolyLine:
                 coordinate += coordinates[-2]
             coordinates.append(round(coordinate, 5))
 
-        return zip(coordinates, coordinates[1:])[::2]
+        return list(zip(coordinates, coordinates[1:]))[::2]
 
     def _extract_chunks(self, data):
         chunks, chunk = [], []

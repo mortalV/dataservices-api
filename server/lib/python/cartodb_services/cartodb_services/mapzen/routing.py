@@ -110,7 +110,7 @@ class MapzenRouting(Traceable):
             shape = PolyLine().decode(legs['shape'])
             length = legs['summary']['length']
             duration = legs['summary']['time']
-            return MapzenRoutingResponse(shape, length, duration)
+            return MapzenRoutingResponse(shape, length, int(duration))
         except IndexError:
             return []
         except KeyError:
