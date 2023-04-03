@@ -98,7 +98,7 @@ class MapzenIsolines:
         location_estimates = [self._calculate_dest_location(origin, a, upper_rmax / 2.0) for a in angles]
 
         # Iterate to refine the first solution
-        for i in xrange(0, self.MAX_ITERS):
+        for i in range(0, self.MAX_ITERS):
             # Calculate the "actual" cost for each location estimate.
             # NOTE: sometimes it cannot calculate the cost and returns None.
             #   Just assume isorange and stop the calculations there
@@ -122,7 +122,7 @@ class MapzenIsolines:
                 break
 
             # let's refine the solution, binary search
-            for j in xrange(0, self.NUMBER_OF_ANGLES):
+            for j in range(0, self.NUMBER_OF_ANGLES):
 
                 if abs(errors[j]) > self.TOLERANCE:
                     if errors[j] > 0:
@@ -145,7 +145,7 @@ class MapzenIsolines:
     # NOTE: all angles in calculations are in radians
     def _get_angles(self, number_of_angles):
         step = (2.0 * pi) / number_of_angles
-        return [(x * step) for x in xrange(0, number_of_angles)]
+        return [(x * step) for x in range(0, number_of_angles)]
 
     def _calculate_dest_location(self, origin, angle, radius):
         origin_lat_radians = radians(origin['lat'])

@@ -20,7 +20,8 @@ class MatrixClient(Traceable):
     """
 
     #valhalla equals https://valhalla.readthedocs.io/en/latest/api/matrix/api-reference/ sources_to_targets method
-    ONE_TO_MANY_URL = 'https://matrix.mapzen.com/one_to_many'
+    #ONE_TO_MANY_URL = 'https://matrix.mapzen.com/one_to_many'
+    ONE_TO_MANY_URL = 'https://dev.epsilonmetrics.ru:8002/sources_to_targets'
     READ_TIMEOUT = 60
     CONNECT_TIMEOUT = 10
 
@@ -28,7 +29,7 @@ class MatrixClient(Traceable):
         service_params = service_params or {}
         self._matrix_key = matrix_key
         self._logger = logger
-        self._url = service_params.get('one_to_many_url', self.ONE_TO_MANY_URL)
+        self._url = service_params.get('base_url', self.ONE_TO_MANY_URL)
         self._connect_timeout = service_params.get('connect_timeout', self.CONNECT_TIMEOUT)
         self._read_timeout = service_params.get('read_timeout', self.READ_TIMEOUT)
 
